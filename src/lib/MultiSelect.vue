@@ -6,17 +6,6 @@
             @focus="openOptions"
     >
         <i class="dropdown icon"></i>
-        <template v-if="!hideSelectedOptions">
-            <a
-                    v-for="(option, idx) in selectedOptions"
-                    :key="idx"
-                    class="ui label transition visible"
-                    style="display: inline-block !important;"
-                    :data-vss-custom-attr="customAttr(option)"
-            >
-                {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
-            </a>
-        </template>
         <input
                 class="search"
                 autocomplete="off"
@@ -61,6 +50,17 @@
                     {{option.text}}
                 </div>
             </template>
+        </div>
+        <div class="activeItems" v-if="!hideSelectedOptions">
+            <a
+                    v-for="(option, idx) in selectedOptions"
+                    :key="idx"
+                    class="ui label transition visible"
+                    style="display: inline-block !important;"
+                    :data-vss-custom-attr="customAttr(option)"
+            >
+                {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
+            </a>
         </div>
     </div>
 </template>

@@ -41,7 +41,7 @@
         v-for="(option, idx) in filteredOptions"
         :key="idx"
         class="item"
-        :class="{ 'selected': option.selected || pointer === idx }"
+        :class="{ 'selected': option.selected }"
         :data-vss-custom-attr="customAttrs[idx] ? customAttrs[idx] : ''"
         @click.stop="selectItem(option)"
         @mousedown="mousedownItem"
@@ -180,9 +180,10 @@ export default {
       common.mousedownItem(this)
     },
     selectItem (option) {
+        this.$emit('select', option);
+        option.selected = true;
       this.searchText = '' // reset text when select item
       this.closeOptions()
-      this.$emit('select', option)
       if (option.value === option.text) {
         this.searchText = option.value
       }
