@@ -23,6 +23,7 @@
                 @keydown.enter.prevent=""
                 @keyup.enter.prevent="enterItem"
                 @keydown.delete="deleteTextOrItem"
+                :readonly="readonly"
         />
         <div
                 class="text"
