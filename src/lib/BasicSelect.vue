@@ -5,7 +5,7 @@
             @click="openOptions"
             @focus="openOptions"
     >
-        <i class="dropdown icon"></i>
+        <slot name="icon"></slot>
         <input
                 class="search"
                 autocomplete="off"
