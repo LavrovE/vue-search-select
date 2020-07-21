@@ -76,13 +76,7 @@
         },
         methods: {
             onSelect(item) {
-                this.clearAllSelectedItems();
                 this.item = item
-            },
-            clearAllSelectedItems() {
-                for (let i = 0; i < this.options.length; i++) {
-                    this.options[i].selected = false;
-                }
             },
             reset() {
                 this.item = {}
@@ -96,7 +90,6 @@
             BasicSelect
         },
         mounted() {
-            this.clearAllSelectedItems();
         }
     }
 </script>
