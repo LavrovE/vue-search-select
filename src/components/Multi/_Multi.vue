@@ -88,7 +88,7 @@ export default {
     }
   },
   methods: {
-    onSelect (items, lastSelectItem) {
+    onSelect (items, {lastSelectItem}) {
       this.items = items
       this.lastSelectItem = lastSelectItem
     },
