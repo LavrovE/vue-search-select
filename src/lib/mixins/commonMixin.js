@@ -32,7 +32,7 @@ export default {
                 return text.match(escapedRegExp(inputText))
             }
         },
-        disableTexting: {
+        searchIsEnabled: {
             type: Boolean,
             default: false,
         },

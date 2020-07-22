@@ -23,7 +23,7 @@
                 @keydown.enter.prevent=""
                 @keyup.enter.prevent="enterItem"
                 @keydown.delete="deleteTextOrItem"
-                :readonly="disableTexting"
+                :readonly="!searchIsEnabled"
         />
         <div
                 class="text"
