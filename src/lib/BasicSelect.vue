@@ -37,6 +37,7 @@
                 :class="menuClass"
                 :style="menuStyle"
                 tabindex="-1"
+                v-if="filteredOptions.length > 0"
         >
             <div
                     v-for="(option, idx) in filteredOptions"
