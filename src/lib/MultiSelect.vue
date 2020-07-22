@@ -5,25 +5,6 @@
             @click="openOptions"
             @focus="openOptions"
     >
-        <slot name="icon"></slot>
-        <input
-                class="search"
-                autocomplete="off"
-                tabindex="0"
-                :id="id"
-                :name="name"
-                v-model="searchText"
-                ref="input"
-                :style="inputWidth"
-                @focus.prevent="openOptions"
-                @keyup.esc="closeOptions"
-                @blur="blurInput"
-                @keydown.up="prevItem"
-                @keydown.down="nextItem"
-                @keydown.enter.prevent=""
-                @keyup.enter.prevent="enterItem"
-                @keydown.delete="deleteTextOrLastItem"
-        />
         <div
                 class="text"
                 :class="textClass"
@@ -51,17 +32,34 @@
                 </div>
             </template>
         </div>
-        <div class="activeItems" v-if="!hideSelectedOptions">
-            <a
-                    v-for="(option, idx) in selectedOptions"
-                    :key="idx"
-                    class="ui label transition visible"
-                    style="display: inline-block !important;"
-                    :data-vss-custom-attr="customAttr(option)"
-            >
-                {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
-            </a>
-        </div>
+        <a
+                v-for="(option, idx) in selectedOptions"
+                :key="idx"
+                class="ui label transition visible"
+                style="display: inline-block !important;"
+                :data-vss-custom-attr="customAttr(option)"
+        >
+            {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
+        </a>
+        <input
+                class="search"
+                autocomplete="off"
+                tabindex="0"
+                :id="id"
+                :name="name"
+                v-model="searchText"
+                ref="input"
+                :style="inputWidth"
+                @focus.prevent="openOptions"
+                @keyup.esc="closeOptions"
+                @blur="blurInput"
+                @keydown.up="prevItem"
+                @keydown.down="nextItem"
+                @keydown.enter.prevent=""
+                @keyup.enter.prevent="enterItem"
+                @keydown.delete="deleteTextOrLastItem"
+        />
+        <slot name="icon"></slot>
     </div>
 </template>
 
