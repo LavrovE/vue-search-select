@@ -1,14 +1,44 @@
 <template>
-    <div
-            class="ui fluid search dropdown selection multiple"
-            :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
-            @click="openOptions"
-            @focus="openOptions"
-    >
+    <div>
         <div
-                class="text"
-                :class="textClass"
-        >{{inputText}}
+                class="ui fluid search dropdown selection multiple"
+                :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
+                @click="openOptions"
+                @focus="openOptions"
+        >
+            <div
+                    class="text"
+                    :class="textClass"
+            >{{inputText}}
+            </div>
+            <a
+                    v-for="(option, idx) in selectedOptions"
+                    :key="idx"
+                    :class="['ui', 'label', 'transition', 'visible', {first:idx === 0}, {last: idx=== selectedOptions.length -1}]"
+                    style="display: inline-flex !important;"
+                    :data-vss-custom-attr="customAttr(option)"
+            >
+                {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
+            </a>
+            <input
+                    class="search"
+                    autocomplete="off"
+                    tabindex="0"
+                    :id="id"
+                    :name="name"
+                    v-model="searchText"
+                    ref="input"
+                    :style="inputWidth"
+                    @focus.prevent="openOptions"
+                    @keyup.esc="closeOptions"
+                    @blur="blurInput"
+                    @keydown.up="prevItem"
+                    @keydown.down="nextItem"
+                    @keydown.enter.prevent=""
+                    @keyup.enter.prevent="enterItem"
+                    @keydown.delete="deleteTextOrLastItem"
+            />
+            <slot name="icon"></slot>
         </div>
         <div
                 class="menu"
@@ -32,34 +62,6 @@
                 </div>
             </template>
         </div>
-        <a
-                v-for="(option, idx) in selectedOptions"
-                :key="idx"
-                :class="['ui', 'label', 'transition', 'visible', {first:idx === 0}, {last: idx=== selectedOptions.length -1}]"
-                style="display: inline-flex !important;"
-                :data-vss-custom-attr="customAttr(option)"
-        >
-            {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
-        </a>
-        <input
-                class="search"
-                autocomplete="off"
-                tabindex="0"
-                :id="id"
-                :name="name"
-                v-model="searchText"
-                ref="input"
-                :style="inputWidth"
-                @focus.prevent="openOptions"
-                @keyup.esc="closeOptions"
-                @blur="blurInput"
-                @keydown.up="prevItem"
-                @keydown.down="nextItem"
-                @keydown.enter.prevent=""
-                @keyup.enter.prevent="enterItem"
-                @keydown.delete="deleteTextOrLastItem"
-        />
-        <slot name="icon"></slot>
     </div>
 </template>
 
