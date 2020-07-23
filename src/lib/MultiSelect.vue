@@ -20,23 +20,23 @@
             >
                 {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
             </a>
-            <input
-                    class="search"
-                    autocomplete="off"
-                    tabindex="0"
-                    :id="id"
-                    :name="name"
-                    v-model="searchText"
-                    ref="input"
-                    :style="inputWidth"
-                    @focus.prevent="openOptions"
-                    @keyup.esc="closeOptions"
-                    @blur="blurInput"
-                    @keydown.up="prevItem"
-                    @keydown.down="nextItem"
-                    @keydown.enter.prevent=""
-                    @keyup.enter.prevent="enterItem"
-                    @keydown.delete="deleteTextOrLastItem"
+            <input :readonly="!searchIsEnabled"
+                   class="search"
+                   autocomplete="off"
+                   tabindex="0"
+                   :id="id"
+                   :name="name"
+                   v-model="searchText"
+                   ref="input"
+                   :style="inputWidth"
+                   @focus.prevent="openOptions"
+                   @keyup.esc="closeOptions"
+                   @blur="blurInput"
+                   @keydown.up="prevItem"
+                   @keydown.down="nextItem"
+                   @keydown.enter.prevent=""
+                   @keyup.enter.prevent="enterItem"
+                   @keydown.delete="deleteTextOrLastItem"
             />
             <slot name="icon"></slot>
         </div>
