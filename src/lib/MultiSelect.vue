@@ -36,7 +36,7 @@
                 v-for="(option, idx) in selectedOptions"
                 :key="idx"
                 :class="['ui', 'label', 'transition', 'visible', {first:idx === 0}, {last: idx=== selectedOptions.length -1}]"
-                style="display: inline-block !important;"
+                style="display: inline-flex !important;"
                 :data-vss-custom-attr="customAttr(option)"
         >
             {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
