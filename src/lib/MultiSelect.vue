@@ -35,7 +35,7 @@
         <a
                 v-for="(option, idx) in selectedOptions"
                 :key="idx"
-                class="ui label transition visible"
+                :class="['ui', 'label', 'transition', 'visible', {first:idx === 0}, {last: idx=== selectedOptions.length -1}]"
                 style="display: inline-block !important;"
                 :data-vss-custom-attr="customAttr(option)"
         >
