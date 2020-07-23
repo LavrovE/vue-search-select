@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-click-outside="closeOptions">
         <div
                 class="ui fluid search dropdown selection multiple"
                 :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
@@ -68,8 +68,12 @@
 <script>
     import common from './common'
     import {baseMixin, commonMixin, optionAwareMixin} from './mixins'
+    import ClickOutside from 'vue-click-outside'
 
     export default {
+        directives: {
+            ClickOutside
+        },
         name: 'MultiSelect',
         mixins: [baseMixin, commonMixin, optionAwareMixin],
         props: {

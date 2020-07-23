@@ -3286,6 +3286,83 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 /***/ }),
 
+/***/ "e67d":
+/***/ (function(module, exports) {
+
+function validate(binding) {
+  if (typeof binding.value !== 'function') {
+    console.warn('[Vue-click-outside:] provided expression', binding.expression, 'is not a function.')
+    return false
+  }
+
+  return true
+}
+
+function isPopup(popupItem, elements) {
+  if (!popupItem || !elements)
+    return false
+
+  for (var i = 0, len = elements.length; i < len; i++) {
+    try {
+      if (popupItem.contains(elements[i])) {
+        return true
+      }
+      if (elements[i].contains(popupItem)) {
+        return false
+      }
+    } catch(e) {
+      return false
+    }
+  }
+
+  return false
+}
+
+function isServer(vNode) {
+  return typeof vNode.componentInstance !== 'undefined' && vNode.componentInstance.$isServer
+}
+
+exports = module.exports = {
+  bind: function (el, binding, vNode) {
+    if (!validate(binding)) return
+
+    // Define Handler and cache it on the element
+    function handler(e) {
+      if (!vNode.context) return
+
+      // some components may have related popup item, on which we shall prevent the click outside event handler.
+      var elements = e.path || (e.composedPath && e.composedPath())
+      elements && elements.length > 0 && elements.unshift(e.target)
+
+      if (el.contains(e.target) || isPopup(vNode.context.popupItem, elements)) return
+
+      el.__vueClickOutside__.callback(e)
+    }
+
+    // add Event Listeners
+    el.__vueClickOutside__ = {
+      handler: handler,
+      callback: binding.value
+    }
+    const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click';
+    !isServer(vNode) && document.addEventListener(clickHandler, handler)
+  },
+
+  update: function (el, binding) {
+    if (validate(binding)) el.__vueClickOutside__.callback = binding.value
+  },
+
+  unbind: function (el, binding, vNode) {
+    // Remove Event Listeners
+    const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click';
+    !isServer(vNode) && el.__vueClickOutside__ && document.removeEventListener(clickHandler, el.__vueClickOutside__.handler)
+    delete el.__vueClickOutside__
+  }
+}
+
+
+/***/ }),
+
 /***/ "e6f3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4174,15 +4251,19 @@ var ListSelect_component = normalizeComponent(
 )
 
 /* harmony default export */ var ListSelect = (ListSelect_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42ecbc76-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/lib/MultiSelect.vue?vue&type=template&id=571aa0b5&
-var MultiSelectvue_type_template_id_571aa0b5_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"ui fluid search dropdown selection multiple",class:{ 'active visible':_vm.showMenu, 'error': _vm.isError, 'disabled': _vm.isDisabled },on:{"click":_vm.openOptions,"focus":_vm.openOptions}},[_c('div',{staticClass:"text",class:_vm.textClass},[_vm._v(_vm._s(_vm.inputText)+"\n        ")]),_vm._l((_vm.selectedOptions),function(option,idx){return _c('a',{key:idx,class:['ui', 'label', 'transition', 'visible', {first:idx === 0}, {last: idx=== _vm.selectedOptions.length -1}],staticStyle:{"display":"inline-flex !important"},attrs:{"data-vss-custom-attr":_vm.customAttr(option)}},[_vm._v("\n            "+_vm._s(option.text)),_c('i',{staticClass:"delete icon",on:{"click":function($event){return _vm.deleteItem(option)}}})])}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.searchText),expression:"searchText"}],ref:"input",staticClass:"search",style:(_vm.inputWidth),attrs:{"readonly":!_vm.searchIsEnabled,"autocomplete":"off","tabindex":"0","id":_vm.id,"name":_vm.name},domProps:{"value":(_vm.searchText)},on:{"focus":function($event){$event.preventDefault();return _vm.openOptions($event)},"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.closeOptions($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.enterItem($event)}],"blur":_vm.blurInput,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }return _vm.prevItem($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }return _vm.nextItem($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"delete",[8,46],$event.key,["Backspace","Delete","Del"])){ return null; }return _vm.deleteTextOrLastItem($event)}],"input":function($event){if($event.target.composing){ return; }_vm.searchText=$event.target.value}}}),_vm._t("icon")],2),_c('div',{ref:"menu",staticClass:"menu",class:_vm.menuClass,style:(_vm.menuStyle),attrs:{"tabindex":"-1"},on:{"mousedown":function($event){$event.preventDefault();}}},[_vm._l((_vm.filteredOptions),function(option,idx){return [_c('div',{key:idx,staticClass:"item",class:{ 'selected': option.selected},attrs:{"data-vss-custom-attr":_vm.customAttr(option)},on:{"click":function($event){$event.stopPropagation();return _vm.selectItem(option)},"mousedown":_vm.mousedownItem,"mouseenter":function($event){return _vm.pointerSet(idx)}}},[_vm._v("\n                "+_vm._s(option.text)+"\n            ")])]})],2)])}
-var MultiSelectvue_type_template_id_571aa0b5_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42ecbc76-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/lib/MultiSelect.vue?vue&type=template&id=6c96be8b&
+var MultiSelectvue_type_template_id_6c96be8b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"click-outside",rawName:"v-click-outside",value:(_vm.closeOptions),expression:"closeOptions"}]},[_c('div',{staticClass:"ui fluid search dropdown selection multiple",class:{ 'active visible':_vm.showMenu, 'error': _vm.isError, 'disabled': _vm.isDisabled },on:{"click":_vm.openOptions,"focus":_vm.openOptions}},[_c('div',{staticClass:"text",class:_vm.textClass},[_vm._v(_vm._s(_vm.inputText)+"\n        ")]),_vm._l((_vm.selectedOptions),function(option,idx){return _c('a',{key:idx,class:['ui', 'label', 'transition', 'visible', {first:idx === 0}, {last: idx=== _vm.selectedOptions.length -1}],staticStyle:{"display":"inline-flex !important"},attrs:{"data-vss-custom-attr":_vm.customAttr(option)}},[_vm._v("\n            "+_vm._s(option.text)),_c('i',{staticClass:"delete icon",on:{"click":function($event){return _vm.deleteItem(option)}}})])}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.searchText),expression:"searchText"}],ref:"input",staticClass:"search",style:(_vm.inputWidth),attrs:{"readonly":!_vm.searchIsEnabled,"autocomplete":"off","tabindex":"0","id":_vm.id,"name":_vm.name},domProps:{"value":(_vm.searchText)},on:{"focus":function($event){$event.preventDefault();return _vm.openOptions($event)},"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.closeOptions($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.enterItem($event)}],"blur":_vm.blurInput,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }return _vm.prevItem($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }return _vm.nextItem($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"delete",[8,46],$event.key,["Backspace","Delete","Del"])){ return null; }return _vm.deleteTextOrLastItem($event)}],"input":function($event){if($event.target.composing){ return; }_vm.searchText=$event.target.value}}}),_vm._t("icon")],2),_c('div',{ref:"menu",staticClass:"menu",class:_vm.menuClass,style:(_vm.menuStyle),attrs:{"tabindex":"-1"},on:{"mousedown":function($event){$event.preventDefault();}}},[_vm._l((_vm.filteredOptions),function(option,idx){return [_c('div',{key:idx,staticClass:"item",class:{ 'selected': option.selected},attrs:{"data-vss-custom-attr":_vm.customAttr(option)},on:{"click":function($event){$event.stopPropagation();return _vm.selectItem(option)},"mousedown":_vm.mousedownItem,"mouseenter":function($event){return _vm.pointerSet(idx)}}},[_vm._v("\n                "+_vm._s(option.text)+"\n            ")])]})],2)])}
+var MultiSelectvue_type_template_id_6c96be8b_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/lib/MultiSelect.vue?vue&type=template&id=571aa0b5&
+// CONCATENATED MODULE: ./src/lib/MultiSelect.vue?vue&type=template&id=6c96be8b&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
 var es6_regexp_to_string = __webpack_require__("6b54");
+
+// EXTERNAL MODULE: ./node_modules/vue-click-outside/index.js
+var vue_click_outside = __webpack_require__("e67d");
+var vue_click_outside_default = /*#__PURE__*/__webpack_require__.n(vue_click_outside);
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/lib/MultiSelect.vue?vue&type=script&lang=js&
 
@@ -4258,7 +4339,11 @@ var es6_regexp_to_string = __webpack_require__("6b54");
 //
 
 
+
 /* harmony default export */ var MultiSelectvue_type_script_lang_js_ = ({
+  directives: {
+    ClickOutside: vue_click_outside_default.a
+  },
   name: 'MultiSelect',
   mixins: [baseMixin, commonMixin, optionAwareMixin],
   props: {
@@ -4433,8 +4518,8 @@ var es6_regexp_to_string = __webpack_require__("6b54");
 
 var MultiSelect_component = normalizeComponent(
   lib_MultiSelectvue_type_script_lang_js_,
-  MultiSelectvue_type_template_id_571aa0b5_render,
-  MultiSelectvue_type_template_id_571aa0b5_staticRenderFns,
+  MultiSelectvue_type_template_id_6c96be8b_render,
+  MultiSelectvue_type_template_id_6c96be8b_staticRenderFns,
   false,
   null,
   null,
