@@ -3,6 +3,7 @@
     <div
       class="ui fluid search dropdown selection multiple"
       :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
+      @click="openOptions"
       @focus="openOptions"
     >
       <div
@@ -37,7 +38,7 @@
              @keyup.enter.prevent="enterItem"
              @keydown.delete="deleteTextOrLastItem"
       />
-      <div @click="toggleOptions">
+      <div @click="toggleOptions" style="width: 100%; cursor:pointer;">
         <slot name="icon"></slot>
       </div>
     </div>
