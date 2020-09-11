@@ -212,7 +212,7 @@
                 const selectedOptions = this.selectedOptions.filter(o => {
                     return o.value !== option.value
                 })
-                this.$emit('select', selectedOptions, option, 'delete')
+                // this.$emit('select', selectedOptions, option, 'delete')
             },
             accentsTidy(s) {
                 let r = s.toString().toLowerCase()
