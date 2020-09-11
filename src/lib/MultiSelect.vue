@@ -182,6 +182,7 @@
         common.closeOptions(this)
       },
       toggleOptions() {
+        console.log('click on toggle button')
         if (this.showMenu) {
           this.closeOptions();
         } else {
