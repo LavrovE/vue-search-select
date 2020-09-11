@@ -3,7 +3,7 @@
     <div
       class="ui fluid search dropdown selection multiple"
       :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
-      @click.capture="openOptionss"
+      @click="openOptions"
     >
       <div
         class="text"
@@ -35,7 +35,7 @@
              @keyup.enter.prevent="enterItem"
              @keydown.delete="deleteTextOrLastItem"
       />
-      <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click="toggleOptions">
+      <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
         <slot name="icon"></slot>
       </div>
     </div>
@@ -166,12 +166,6 @@
       },
       openOptions() {
         if (!this.showMenu) {
-          common.openOptions(this)
-        }
-      },
-      openOptionss(e) {
-        console.log(e.target)
-        if (e.target.className !== 'toggleButton') {
           common.openOptions(this)
         }
       },
