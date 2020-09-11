@@ -8,8 +8,8 @@ export default {
   blurInput (self) {
     if (!self.mousedownState) {
       self.searchText = ''
-      self.closeOptions()
     }
+    self.closeOptions()
   },
   closeOptions (self) {
     self.showMenu = false

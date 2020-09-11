@@ -3,8 +3,7 @@
     <div
       class="ui fluid search dropdown selection multiple"
       :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
-      @click="openOptions"
-      @focus="openOptions"
+      @click="openOptionss"
     >
       <div
         class="text"
@@ -29,16 +28,14 @@
              v-model="searchText"
              ref="input"
              :style="inputWidth"
-             @focus.prevent="openOptions"
              @keyup.esc="closeOptions"
-             @blur="blurInput"
              @keydown.up="prevItem"
              @keydown.down="nextItem"
              @keydown.enter.prevent=""
              @keyup.enter.prevent="enterItem"
              @keydown.delete="deleteTextOrLastItem"
       />
-      <div @click.exact="toggleOptions" style="cursor: pointer; margin-left: auto;">
+      <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.capture="toggleOptions">
         <slot name="icon"></slot>
       </div>
     </div>
@@ -168,7 +165,13 @@
         }
       },
       openOptions() {
+        console.log('open')
         if (!this.showMenu) {
+          common.openOptions(this)
+        }
+      },
+      openOptionss(e) {
+        if (e.target.className !== 'toggleButton') {
           common.openOptions(this)
         }
       },
@@ -241,11 +244,6 @@
         r = r.replace(new RegExp('[ùúûü]', 'g'), 'u')
         r = r.replace(new RegExp('[ýÿ]', 'g'), 'y')
         return r
-      },
-      optionIsSelected(item) {
-        return find(this.selectedOptions, (option) => {
-          return option.value === item.value;
-        });
       },
     }
   }
