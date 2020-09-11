@@ -197,7 +197,6 @@
                 if (option.selected) {
                     this.deleteItem(option);
                 } else {
-                  console.log('NOT', option)
                     const tempSelectedOptions = this.selectedOptions.concat(option)
                     const selectedOptions = tempSelectedOptions.filter((el, idx) => {
                         return tempSelectedOptions.indexOf(el) === idx
@@ -213,7 +212,6 @@
                 const selectedOptions = this.selectedOptions.filter(o => {
                     return o.value !== option.value
                 })
-              console.log(selectedOptions)
                 this.$emit('select', selectedOptions, option, 'delete')
             },
             accentsTidy(s) {
