@@ -197,7 +197,7 @@
                 if (option.selected) {
                     this.deleteItem(option);
                 } else {
-                  console.log('NOT')
+                  console.log('NOT', option)
                     const tempSelectedOptions = this.selectedOptions.concat(option)
                     const selectedOptions = tempSelectedOptions.filter((el, idx) => {
                         return tempSelectedOptions.indexOf(el) === idx
