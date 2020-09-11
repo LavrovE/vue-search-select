@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-click-outside="closeOptions">
     <div
       class="ui fluid search dropdown selection multiple"
       :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
