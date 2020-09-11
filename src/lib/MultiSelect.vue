@@ -52,7 +52,7 @@
         <div
           :key="idx"
           class="item"
-          :class="{ 'selected': optionIsSelected(option)}"
+          :class="{ 'selected': option.selected}"
           :data-vss-custom-attr="customAttr(option)"
           @click.stop="selectItem(option)"
           @mousedown="mousedownItem"
