@@ -171,6 +171,7 @@
         }
       },
       openOptionss(e) {
+        console.log('di4')
         if (e.target.className !== 'toggleButton') {
           common.openOptions(this)
         }
