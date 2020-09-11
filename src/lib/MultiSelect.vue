@@ -166,7 +166,9 @@
         }
       },
       openOptions() {
-        common.openOptions(this)
+        if (!this.showMenu) {
+          common.openOptions(this)
+        }
       },
       blurInput() {
         common.blurInput(this)
