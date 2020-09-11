@@ -3,7 +3,7 @@
     <div
       class="ui fluid search dropdown selection multiple"
       :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
-      @click="openOptionss"
+      @click.capture="openOptionss"
     >
       <div
         class="text"
