@@ -173,11 +173,9 @@
         common.blurInput(this)
       },
       closeOptions() {
-        console.log('out')
         common.closeOptions(this)
       },
       toggleOptions() {
-        console.log('pqpq')
         if (this.showMenu) {
           this.closeOptions();
         } else {
