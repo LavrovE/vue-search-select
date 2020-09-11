@@ -3,7 +3,7 @@
     <div
       class="ui fluid search dropdown selection multiple"
       :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
-      @click.capture="openOptionss"
+      @click="openOptionss"
     >
       <div
         class="text"
@@ -170,6 +170,7 @@
         }
       },
       openOptionss(e) {
+        console.log(e.target.className)
         if (e.target.className !== 'toggleButton') {
           common.openOptions(this)
         }
