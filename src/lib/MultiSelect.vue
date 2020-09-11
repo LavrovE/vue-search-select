@@ -35,7 +35,7 @@
              @keyup.enter.prevent="enterItem"
              @keydown.delete="deleteTextOrLastItem"
       />
-      <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.capture="toggleOptions">
+      <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click="toggleOptions">
         <slot name="icon"></slot>
       </div>
     </div>
