@@ -179,6 +179,7 @@
         common.blurInput(this)
       },
       closeOptions() {
+        console.log('close')
         common.closeOptions(this)
       },
       toggleOptions() {
