@@ -1,9 +1,9 @@
 <template>
-  <div v-click-outside="closeOptions">
+  <div>
     <div
       class="ui fluid search dropdown selection multiple"
       :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
-      @click.capture="openOptionss"
+      @click="openOptionss"
     >
       <div
         class="text"
@@ -165,13 +165,11 @@
         }
       },
       openOptions() {
-        console.log('open')
         if (!this.showMenu) {
           common.openOptions(this)
         }
       },
       openOptionss(e) {
-        console.log('di4')
         if (e.target.className !== 'toggleButton') {
           common.openOptions(this)
         }
@@ -180,11 +178,10 @@
         common.blurInput(this)
       },
       closeOptions() {
-        console.log('close')
+        console.log('out')
         common.closeOptions(this)
       },
       toggleOptions() {
-        console.log('click on toggle button')
         if (this.showMenu) {
           this.closeOptions();
         } else {
