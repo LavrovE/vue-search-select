@@ -14,6 +14,9 @@
             placeholder="select item"
             @select="onSelect"
           >
+            <template slot="icon">
+             123
+            </template>
           </multi-select>
         </div>
       </div>
