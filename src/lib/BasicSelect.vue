@@ -3,54 +3,53 @@
     v-click-outside="closeOptions"
     class="ui fluid search selection dropdown"
     :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
+    @click="openOptions"
   >
     <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
       <slot name="icon">2</slot>
     </div>
-    <div @click="openOptions">
-      <input
-        class="search"
-        autocomplete="off"
-        tabindex="0"
-        :id="id"
-        :name="name"
-        :value="searchText"
-        @input="searchText = $event.target.value"
-        ref="input"
-        @keyup.esc="closeOptions"
-        @keydown.up="prevItem"
-        @keydown.down="nextItem"
-        @keydown.enter.prevent=""
-        @keyup.enter.prevent="enterItem"
-        @keydown.delete="deleteTextOrItem"
-        :readonly="!searchIsEnabled"
-      />
+    <input
+      class="search"
+      autocomplete="off"
+      tabindex="0"
+      :id="id"
+      :name="name"
+      :value="searchText"
+      @input="searchText = $event.target.value"
+      ref="input"
+      @keyup.esc="closeOptions"
+      @keydown.up="prevItem"
+      @keydown.down="nextItem"
+      @keydown.enter.prevent=""
+      @keyup.enter.prevent="enterItem"
+      @keydown.delete="deleteTextOrItem"
+      :readonly="!searchIsEnabled"
+    />
+    <div
+      class="text"
+      :class="textClass" :data-vss-custom-attr="searchTextCustomAttr"
+    >{{ inputText }}
+    </div>
+    <div
+      class="menu"
+      ref="menu"
+      @mousedown.prevent
+      :class="menuClass"
+      :style="menuStyle"
+      tabindex="-1"
+      v-if="filteredOptions.length > 0"
+    >
       <div
-        class="text"
-        :class="textClass" :data-vss-custom-attr="searchTextCustomAttr"
-      >{{ inputText }}
-      </div>
-      <div
-        class="menu"
-        ref="menu"
-        @mousedown.prevent
-        :class="menuClass"
-        :style="menuStyle"
-        tabindex="-1"
-        v-if="filteredOptions.length > 0"
+        v-for="(option, idx) in filteredOptions"
+        :key="idx"
+        class="item"
+        :class="{ 'selected': itemIsSelected(option) }"
+        :data-vss-custom-attr="customAttrs[idx] ? customAttrs[idx] : ''"
+        @click.stop="selectItem(option)"
+        @mousedown="mousedownItem"
+        @mouseenter="pointerSet(idx)"
       >
-        <div
-          v-for="(option, idx) in filteredOptions"
-          :key="idx"
-          class="item"
-          :class="{ 'selected': itemIsSelected(option) }"
-          :data-vss-custom-attr="customAttrs[idx] ? customAttrs[idx] : ''"
-          @click.stop="selectItem(option)"
-          @mousedown="mousedownItem"
-          @mouseenter="pointerSet(idx)"
-        >
-          {{ option.text }}
-        </div>
+        {{ option.text }}
       </div>
     </div>
   </div>
