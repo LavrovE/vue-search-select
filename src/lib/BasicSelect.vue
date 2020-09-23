@@ -6,7 +6,7 @@
     @click="openOptions"
   >
     <div class="iconSlot">
-      <i class="delete icon" @click.prevent="deleteTextOrItem"></i>
+      <i class="delete icon" @click.stop="deleteTextOrItem">1</i>
       <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
         <slot name="icon"></slot>
       </div>
