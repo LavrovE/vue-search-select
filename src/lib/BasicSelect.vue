@@ -6,7 +6,7 @@
     @click="openOptions"
   >
     <div class="iconSlot">
-      <i class="delete icon" @click="deleteTextOrItem"></i>
+      <i v-if="searchText" class="delete icon" @click.capture="deleteTextOrItem"></i>
       <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
         <slot name="icon"></slot>
       </div>
