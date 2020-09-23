@@ -6,7 +6,7 @@
     @click="openOptions"
   >
     <div class="iconSlot">
-      <i class="delete icon" @click.stop="deleteTextOrItem">1</i>
+      <i class="delete icon" @click="deleteTextOrItem"></i>
       <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
         <slot name="icon"></slot>
       </div>
@@ -161,7 +161,7 @@
       deleteTextOrItem() {
         if (!this.searchText && this.selectedOption) {
           this.selectItem({})
-          this.openOptions()
+          this.closeOptions()
         }
       },
       openOptions() {
