@@ -6,7 +6,7 @@
     @click="openOptions"
   >
     <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
-      <slot name="icon">2</slot>
+      <slot name="icon"></slot>
     </div>
     <input
       class="search"

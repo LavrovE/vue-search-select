@@ -21,6 +21,7 @@
       </a>
       <input :readonly="!searchIsEnabled"
              class="search"
+             style="width: 0;"
              autocomplete="off"
              tabindex="0"
              :id="id"
