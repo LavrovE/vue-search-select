@@ -5,6 +5,7 @@
     :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
     @click="openOptions"
   >
+    <i class="delete icon" @click="deleteTextOrItem"></i>
     <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
       <slot name="icon"></slot>
     </div>
