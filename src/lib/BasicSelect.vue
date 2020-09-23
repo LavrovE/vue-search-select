@@ -9,6 +9,7 @@
       <slot name="icon"></slot>
     </div>
     <input
+      style="width: 0;"
       class="search"
       autocomplete="off"
       tabindex="0"
