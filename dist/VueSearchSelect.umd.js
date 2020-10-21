@@ -8323,7 +8323,8 @@ var es6_function_name = __webpack_require__("7f7f");
         isError: this.isError,
         isDisabled: this.isDisabled,
         placeholder: this.placeholder,
-        filterPredicate: this.filterPredicate
+        filterPredicate: this.filterPredicate,
+        searchIsEnabled: this.searchIsEnabled
       },
       on: {
         select: this.onSelect,
