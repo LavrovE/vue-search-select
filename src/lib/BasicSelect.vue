@@ -5,6 +5,11 @@
     :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
     @click="openOptions"
   >
+    <div
+      class="text"
+      :class="textClass" :data-vss-custom-attr="searchTextCustomAttr"
+    >{{ inputText }}
+    </div>
     <input
       :style="inputStyle"
       class="search"
@@ -28,11 +33,6 @@
       <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
         <slot name="icon"></slot>
       </div>
-    </div>
-    <div
-      class="text"
-      :class="textClass" :data-vss-custom-attr="searchTextCustomAttr"
-    >{{ inputText }}
     </div>
     <div
       class="menu"
