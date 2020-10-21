@@ -12,7 +12,7 @@
       </div>
     </div>
     <input
-      style="width: 0;"
+      :style="inputStyle"
       class="search"
       autocomplete="off"
       tabindex="0"
@@ -155,7 +155,13 @@
         } else {
           return this.options
         }
-      }
+      },
+      inputStyle() {
+        return {
+          width: this.searchIsEnabled ? 0 : '100%',
+          left: 'inherit',
+        }
+      },
     },
     methods: {
       deleteTextOrItem() {
