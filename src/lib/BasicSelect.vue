@@ -5,12 +5,6 @@
     :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
     @click="openOptions"
   >
-    <div class="iconSlot">
-      <i v-if="selectedOption.value" class="delete icon" @click.capture="deleteTextOrItem"></i>
-      <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
-        <slot name="icon"></slot>
-      </div>
-    </div>
     <input
       :style="inputStyle"
       class="search"
@@ -29,6 +23,12 @@
       @keydown.delete="deleteTextOrItem"
       :readonly="!searchIsEnabled"
     />
+    <div class="iconSlot">
+      <i v-if="selectedOption.value" class="delete icon" @click.capture="deleteTextOrItem"></i>
+      <div class="toggleButton" style="cursor: pointer; margin-left: auto;" @click.stop="toggleOptions">
+        <slot name="icon"></slot>
+      </div>
+    </div>
     <div
       class="text"
       :class="textClass" :data-vss-custom-attr="searchTextCustomAttr"
