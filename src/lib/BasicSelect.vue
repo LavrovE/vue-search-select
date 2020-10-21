@@ -158,7 +158,7 @@
       },
       inputStyle() {
         return {
-          width: this.searchIsEnabled ? 0 : '100%',
+          width: this.searchIsEnabled ? '100%' : 0,
           left: 'inherit',
         }
       },
