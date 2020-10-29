@@ -106,7 +106,7 @@
     },
     computed: {
       inputText() {
-        if (this.searchText || this.selectedOptions > 0) {
+        if (this.searchText || this.selectedOptions.length > 0) {
           return ''
         } else {
           return this.placeholder
