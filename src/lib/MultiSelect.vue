@@ -96,7 +96,7 @@
         showMenu: false,
         searchText: '',
         mousedownState: false, // mousedown on option menu
-        pointer: -1
+        pointer: -1,
       }
     },
     watch: {
@@ -106,7 +106,7 @@
     },
     computed: {
       inputText() {
-        if (this.searchText) {
+        if (this.searchText || this.selectedOptions > 0) {
           return ''
         } else {
           return this.placeholder
