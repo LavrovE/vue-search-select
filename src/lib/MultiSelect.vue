@@ -17,7 +17,12 @@
         style="display: inline-flex !important;"
         :data-vss-custom-attr="customAttr(option)"
       >
-        {{ option.text }}<i class="delete icon" @click="deleteItem(option)"></i>
+        {{ option.text }}
+        <div @click="deleteItem(option)">
+          <slot name="deleteIcon">
+            <i class="delete icon" @click="deleteItem(option)"></i>
+          </slot>
+        </div>
       </a>
       <input :readonly="!searchIsEnabled"
              class="search"
