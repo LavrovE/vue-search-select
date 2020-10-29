@@ -64,6 +64,8 @@
           @mouseenter="pointerSet(idx)"
         >
           {{ option.text }}
+          <slot name="checkboxIcon">
+          </slot>
         </div>
       </template>
     </div>
