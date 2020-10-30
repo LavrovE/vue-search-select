@@ -108,6 +108,7 @@
           handler: this.clickOutside,
           middleware: this.middleware,
           events: ["click"],
+          capture: true,
         },
       }
     },
@@ -168,7 +169,6 @@
         } else {
           return this.options
         }
-        ``
       },
     },
     methods: {
