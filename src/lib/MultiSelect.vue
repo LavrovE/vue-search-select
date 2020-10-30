@@ -1,5 +1,5 @@
 <template>
-  <div v-click-outside="closeOptions">
+  <div v-click-outside="clickOutside">
     <div
       class="ui fluid search dropdown selection multiple"
       :class="{ 'active visible':showMenu, 'error': isError, 'disabled': isDisabled }"
@@ -104,6 +104,11 @@
         searchText: '',
         mousedownState: false, // mousedown on option menu
         pointer: -1,
+        clickOutSideConfig: {
+          handler: this.clickOutside,
+          middleware: this.middleware,
+          events: ["click"],
+        },
       }
     },
     watch: {
@@ -246,6 +251,13 @@
         r = r.replace(new RegExp('[ùúûü]', 'g'), 'u')
         r = r.replace(new RegExp('[ýÿ]', 'g'), 'y')
         return r
+      },
+      clickOutside(e) {
+        console.log("Clicked outside ffefd5!", e);
+      },
+      middleware(e) {
+        console.log("Middleware!");
+        return true;
       },
     }
   }
